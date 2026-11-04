@@ -1,0 +1,37 @@
+name: FragAI PII Filter
+shortDescription: Detect and block personal information in selected MCP traffic.
+description: |
+  Checks MCP messages for personal information using Microsoft Presidio.
+  For the first test, email addresses are blocked. Configure PII_BLOCK_TYPES
+  and PII_REDACT_TYPES to change which types are blocked or redacted.
+  Attach the filter only to the MCP traffic you intend to inspect.
+metadata:
+  categories: Security
+icon: https://raw.githubusercontent.com/HarshDeshmukh26/governance-platform/main/ui/user/static/user/images/governance-platform-icon.svg
+repoURL: https://github.com/yugantb24/FragAI-MCP-filters-
+systemMCPServerType: filter
+filterConfig:
+  toolName: filter_pii
+runtime: containerized
+containerizedConfig:
+  image: ghcr.io/harshdeshmukh26/fragai-pii-filter:0.1.0
+  port: 8080
+  path: /mcp
+config:
+  - key: PII_BLOCK_TYPES
+    name: PII types to block
+    description: Comma-separated Presidio entity types to block, such as EMAIL_ADDRESS.
+    usage: env
+    value: EMAIL_ADDRESS
+  - key: PII_REDACT_TYPES
+    name: PII types to redact
+    description: Comma-separated Presidio entity types to redact when response mutation is enabled.
+    usage: env
+toolPreview:
+  - name: filter_pii
+    description: Inspect an MCP message for configured personal information and return an allow, block, or redaction decision.
+    params:
+      message: MCP JSON-RPC message to inspect.
+resources:
+  requests:
+    memory: 1Gi
