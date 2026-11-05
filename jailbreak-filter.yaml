@@ -1,0 +1,31 @@
+name: FragAI Jailbreak Filter
+shortDescription: Classify jailbreak attempts in selected MCP messages.
+description: |
+  Uses locally bundled ONNX models to classify selected MCP request or response
+  text for jailbreak attempts. A message is blocked when its score meets the
+  configured threshold; it is not rewritten. Classification can make mistakes,
+  so calibrate the threshold and verify behavior on your own traffic before
+  applying it broadly.
+metadata:
+  categories: Security
+icon: https://raw.githubusercontent.com/HarshDeshmukh26/governance-platform/main/ui/user/static/user/images/governance-platform-icon.svg
+repoURL: https://github.com/yugantb24/FragAI-MCP-filters-
+systemMCPServerType: filter
+filterConfig:
+  toolName: filter_jailbreak
+runtime: containerized
+containerizedConfig:
+  image: ghcr.io/harshdeshmukh26/fragai-jailbreak-filter:0.1.0
+  port: 8082
+  path: /mcp
+config:
+  - key: JAILBREAK_THRESHOLD
+    name: Jailbreak score threshold
+    description: Block when a text window's jailbreak score reaches this value; use a number strictly between 0 and 1.
+    usage: env
+    value: "0.5"
+toolPreview:
+  - name: filter_jailbreak
+    description: Classify an MCP message for jailbreak attempts and return an allow or block decision.
+    params:
+      message: MCP JSON-RPC message to inspect.

@@ -2,9 +2,17 @@
 
 Built-in system MCP filter definitions for the FragAI Governance Platform. This is separate from the remote MCP server catalogue.
 
-The initial entry is `pii-filter.yaml`. It uses the `filter_pii` tool at `/mcp` on port 8080 and references the planned image `ghcr.io/harshdeshmukh26/fragai-pii-filter:0.1.0`.
+The catalogue defines three filters:
 
-**Do not connect this catalogue to a production installation until the image has been built, tested, published, and made pullable by the installation.** The filter source currently lives in [yugantb24/FragAI-MCP-filters-](https://github.com/yugantb24/FragAI-MCP-filters-).
+| Entry | Filter tool | Container port |
+| --- | --- | --- |
+| `pii-filter.yaml` | `filter_pii` | 8080 |
+| `prompt-injection-filter.yaml` | `filter_prompt_injection` | 8081 |
+| `jailbreak-filter.yaml` | `filter_jailbreak` | 8082 |
+
+Each entry points to a versioned image under `ghcr.io/harshdeshmukh26` and exposes `/mcp`.
+
+**Before using an entry, confirm its image has been built, tested, published, and made pullable by the installation.** Review the bundled model terms before distributing the jailbreak image. The filter source currently lives in [yugantb24/FragAI-MCP-filters-](https://github.com/yugantb24/FragAI-MCP-filters-).
 
 Validate this catalogue from the Governance Platform repository:
 

@@ -1,0 +1,25 @@
+name: FragAI Prompt Injection Filter
+shortDescription: Block known prompt-injection patterns in selected MCP messages.
+description: |
+  Checks selected MCP request or response text for instruction overrides,
+  role spoofing, and attempts to reveal hidden prompts. Matches are blocked;
+  messages are not rewritten. This pattern-based check can miss unfamiliar
+  attacks or flag quoted examples, so test it on your own traffic before
+  applying it broadly.
+metadata:
+  categories: Security
+icon: https://raw.githubusercontent.com/HarshDeshmukh26/governance-platform/main/ui/user/static/user/images/governance-platform-icon.svg
+repoURL: https://github.com/yugantb24/FragAI-MCP-filters-
+systemMCPServerType: filter
+filterConfig:
+  toolName: filter_prompt_injection
+runtime: containerized
+containerizedConfig:
+  image: ghcr.io/harshdeshmukh26/fragai-prompt-injection-filter:0.1.0
+  port: 8081
+  path: /mcp
+toolPreview:
+  - name: filter_prompt_injection
+    description: Inspect an MCP message for known prompt-injection patterns and return an allow or block decision.
+    params:
+      message: MCP JSON-RPC message to inspect.
