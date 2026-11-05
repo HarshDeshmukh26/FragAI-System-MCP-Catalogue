@@ -17,7 +17,7 @@ Each entry points to a versioned image under `ghcr.io/harshdeshmukh26` and expos
 Validate this catalogue from the Governance Platform repository:
 
 ```powershell
-go run . mcp validate-system-catalog-yaml "C:\Users\deshm\Documents\Codex\2026-09-01\iw\FragAI-System-MCP-Catalogue"
+go run . mcp validate-system-catalog-yaml "<path-to-cloned-FragAI-System-MCP-Catalogue>"
 ```
 
 Catalogue entries only make filters available in the picker. An administrator must create a filter, attach it to selected MCP traffic, and verify the gateway and audit behavior before relying on it.
